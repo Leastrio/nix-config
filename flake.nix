@@ -23,6 +23,11 @@
 
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=v0.7.0";
     hytale-launcher.url = "github:TNAZEP/HytaleLauncherFlake";
+
+    helium = {
+      url = "github:AlvaroParker/helium-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
   outputs = {
     nixpkgs,
@@ -35,8 +40,8 @@
     packages.x86_64-linux = let
       pkgs = nixpkgs.legacyPackages.x86_64-linux;
     in {
-      nest-nvim = pkgs.callPackage ./pkgs/nest-nvim.nix {};
-      transparent-nvim = pkgs.callPackage ./pkgs/transparent-nvim.nix {};
+      nest-nvim = pkgs.callPackage ./packages/nest-nvim.nix {};
+      transparent-nvim = pkgs.callPackage ./packages/transparent-nvim.nix {};
     };
 
     nixosConfigurations = {
@@ -72,6 +77,13 @@
           ./hosts/server
         ];
       };
+
+      mediaServer = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          ./hosts/media_server
+        ];
+      }
     };
   };
 }

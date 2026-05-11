@@ -14,7 +14,7 @@
     ./programs/rofi.nix
     ./programs/waybar.nix
     ./programs/btop.nix
-    #./programs/spicetify.nix
+    ./programs/spicetify.nix
     ./programs/hyprpaper.nix
     ./programs/ghostty.nix
   ];
@@ -57,8 +57,10 @@
       nautilus
       blender
       proton-vpn-cli
+      jellyfin-desktop
       inputs.hyprland-contrib.packages.${pkgs.stdenv.hostPlatform.system}.grimblast
       inputs.hytale-launcher.packages.${pkgs.stdenv.hostPlatform.system}.default
+      inputs.helium.packages.${pkgs.stdenv.hostPlatform.system}.default
     ];
     pointerCursor = {
       name = "catppuccin-mocha-light-cursors";
