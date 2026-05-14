@@ -7,6 +7,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nix-darwin = {
+      url = "github:nix-darwin/nix-darwin/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     lanzaboote.url = "github:nix-community/lanzaboote";
 
     # Programs
@@ -30,8 +35,10 @@
     };
   };
   outputs = {
+    self,
     nixpkgs,
     home-manager,
+    nix-darwin,
     lanzaboote,
     nix-flatpak,
     ...
@@ -84,6 +91,13 @@
           ./hosts/media_server
         ];
       }
+    };
+
+    darwinConfigurations."Jacobs-MacBook-Air" = nix-darwin.lib.darwinSystem {
+      specialArgs = { inherit self; };
+      modules = [
+        ./hosts/laptop
+      ];
     };
   };
 }
