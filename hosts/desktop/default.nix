@@ -11,7 +11,10 @@
 
   boot = {
     bootspec.enable = true;
-    loader.systemd-boot.enable = lib.mkForce false;
+    loader.systemd-boot = {
+      enable = lib.mkForce false;
+      configurationLimit = 5;
+    };
     lanzaboote = {
       enable = true;
       pkiBundle = "/etc/secureboot";
@@ -52,10 +55,6 @@
     home = "/home/jacob";
     extraGroups = ["wheel" "networkmanager" "wireshark" "docker" "dialout"];
     shell = pkgs.fish;
-    openssh.authorizedKeys.keys = [
-      "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDoaJcvg0UPsRsFrkKdDtxn6+OrOMt7m8+NbQAYxxMKaJGFVbCcp3Jf40TvLdP7NDqmHxKYHD7WDO31GPPjckvEmM5tOo8KPrJLKv+aVO40NTb3vDLOGl1O8IjyLoW1bUyG29niO3cJ3ctrcNgldCY42doGcoV4Z+IVfkYjAbGxya0vDoHDcOv1HexKaBG1fZ2izUSMulfGjqZZA85StoV8Xw+nVAeEPeK1fDAqP8t1aBWB9KVo2OpcAF2GnRbECDp98k4/agj/M0SNm7I03pH3E5bMBQdhevwP9jTo2iB0TMbzqZiwNMn+YXa7k1dMDUjvnfmQb2nNkzs3zjKoUag+ZyxKWGDtDwZZTAIiqmN7WKM7Jhj2DU8e+zg1RYf5rozczaoFcssZNaLGKw5jOPdfHHwQxeb/LnJaB1SBn0Kc7DRO7So4xK/Te9nzg/3tBMM21qIsv/CFE46ELydt8XIIkIfppWfmzBp0ccLiL6/25m2yoTCPLlFssK6TolRz70E= jacob@nixos"
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICLvImvMZ1ovetjiDto2nWpY5zz4S1haGf5WFrqtg1l+ jacob@nixos"
-    ];
   };
 
   programs.fish.enable = true;
@@ -70,10 +69,14 @@
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;
+    withUWSM = false;
 
     package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
     portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
   };
+
+  programs.niri.enable = true;
+  programs.wayfire.enable = true;
 
   security.polkit.enable = true;
 
@@ -108,13 +111,21 @@
     };
   };
 
-  services.greetd = {
+  services.displayManager.ly = {
     enable = true;
     settings = {
-      default_session = {
-        user = "jacob";
-        command = "${pkgs.tuigreet}/bin/tuigreet --time --sessions ${config.services.displayManager.sessionData.desktops}/share/xsessions:${config.services.displayManager.sessionData.desktops}/share/wayland-sessions --remember --remember-session";
-      };
+      animation = "colormix";
+      bigclock = "en";
+      bigclock_12hr = true;
+      brightness_down_key = "null";
+      brightness_up_key = "null";
+      hide_version_string = true;
+      default_input = "password";
+      waylandsessions = "${config.services.displayManager.sessionData.desktops}/share/wayland-sessions";
+      xsessions = "${config.services.displayManager.sessionData.desktops}/share/xsessions";
+      xinitrc = "null";
+      restart_cmd = "/run/current-system/sw/bin/systemctl poweroff";
+      shutdown_cmd = "/run/current-system/sw/bin/systemctl reboot";
     };
   };
 
@@ -173,8 +184,6 @@
       kdePackages.polkit-kde-agent-1
       man-pages
       man-pages-posix
-      vesktop
-      protontricks
     ];
     sessionVariables.NIXOS_OZONE_WL = "1";
     variables = {
@@ -182,6 +191,7 @@
       VISUAL = "nvim";
     };
   };
+
   fonts.enableDefaultPackages = true;
   fonts.packages = with pkgs; [
     nerd-fonts.jetbrains-mono

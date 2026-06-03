@@ -5,19 +5,10 @@
   ...
 }: {
   imports = [
-    ./programs/nvim.nix
-    ./programs/hyprland.nix
-    ./programs/obs.nix
-    ./programs/dunst.nix
-    ./programs/starship.nix
-    ./programs/fish.nix
-    ./programs/rofi.nix
-    ./programs/waybar.nix
-    ./programs/btop.nix
-    ./programs/spicetify.nix
-    ./programs/hyprpaper.nix
-    ./programs/ghostty.nix
+    ./programs
+    ./compositors
   ];
+
   home = {
     username = "jacob";
     homeDirectory = "/home/jacob";
@@ -37,7 +28,6 @@
       crosspipe
       obsidian
       insomnia
-      hyprpaper
       ripgrep
       inotify-tools
       jetbrains.datagrip
@@ -57,10 +47,14 @@
       nautilus
       blender
       proton-vpn-cli
-      jellyfin-desktop
+      pavucontrol
+      vesktop
+      protontricks
+      mpvpaper
       inputs.hyprland-contrib.packages.${pkgs.stdenv.hostPlatform.system}.grimblast
       inputs.hytale-launcher.packages.${pkgs.stdenv.hostPlatform.system}.default
       inputs.helium.packages.${pkgs.stdenv.hostPlatform.system}.default
+      inputs.jellynav.packages.${pkgs.stdenv.hostPlatform.system}.default
     ];
     pointerCursor = {
       name = "catppuccin-mocha-light-cursors";

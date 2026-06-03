@@ -23,6 +23,9 @@
   users.users.jacob = {
     isNormalUser = true;
     extraGroups = ["wheel" "docker"];
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICLvImvMZ1ovetjiDto2nWpY5zz4S1haGf5WFrqtg1l+ jacob@nixos"
+    ];
     packages = with pkgs; [
       tree
     ];
@@ -64,7 +67,13 @@
     };
   };
 
-  services.openssh.enable = true;
+  services.openssh = {
+    enable = true;
+    settings = {
+      PasswordAuthentication = false;
+      KbdInteractiveAuthentication = false;
+    };
+  };
 
   networking.firewall.allowedTCPPorts = [22];
 

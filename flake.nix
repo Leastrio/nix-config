@@ -21,6 +21,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    noctalia = {
+      url = "github:noctalia-dev/noctalia-shell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     spicetify-nix = {
       url = "github:Gerg-L/spicetify-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -33,6 +38,8 @@
       url = "github:AlvaroParker/helium-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    jellynav.url = "github:Leastrio/jellynav";
   };
   outputs = {
     self,
@@ -72,6 +79,24 @@
           }
           {
             nixpkgs.config.allowUnfree = true;
+            nixpkgs.overlays = [
+              (final: prev: {
+                wf-config = prev.wf-config.overrideAttrs (old: {
+                  mesonFlags =
+                    (old.mesonFlags or [])
+                    ++ [ "-Dtests=disabled" ];
+                });
+
+                wayfire = prev.wayfire.overrideAttrs (old: {
+                  mesonFlags = 
+                    (old.mesonFlags or [])
+                    ++ [ 
+                      "-Dtests=disabled"
+                      "-Dwf-touch:tests=disabled"
+                    ];
+                });
+              })
+            ];
           }
           lanzaboote.nixosModules.lanzaboote
           nix-flatpak.nixosModules.nix-flatpak
@@ -90,7 +115,7 @@
         modules = [
           ./hosts/media_server
         ];
-      }
+      };
     };
 
     darwinConfigurations."Jacobs-MacBook-Air" = nix-darwin.lib.darwinSystem {
