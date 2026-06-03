@@ -18,7 +18,17 @@
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
-  virtualisation.docker.enable = true;
+  virtualisation.docker = {
+    enable = true;
+    daemon.settings = {
+      log-driver = "json-file";
+
+      log-opts = {
+        max-size = "10m";
+        max-file = "3";
+      };
+    };
+  };
 
   users.users.jacob = {
     isNormalUser = true;
