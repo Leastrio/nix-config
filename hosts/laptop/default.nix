@@ -1,5 +1,8 @@
 { self, pkgs, ... }: {
-  environment.systemPackages = [];
+  environment.systemPackages = with pkgs; [
+    nixd
+    sbcl
+  ];
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   security.pam.services.sudo_local.touchIdAuth = true;
   system.configurationRevision = self.rev or self.dirtyRev or null;
