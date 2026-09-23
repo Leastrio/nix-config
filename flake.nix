@@ -22,7 +22,7 @@
     };
 
     noctalia = {
-      url = "github:noctalia-dev/noctalia-shell";
+      url = "github:noctalia-dev/noctalia";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -78,25 +78,12 @@
             };
           }
           {
-            nixpkgs.config.allowUnfree = true;
-            nixpkgs.overlays = [
-              (final: prev: {
-                wf-config = prev.wf-config.overrideAttrs (old: {
-                  mesonFlags =
-                    (old.mesonFlags or [])
-                    ++ [ "-Dtests=disabled" ];
-                });
-
-                wayfire = prev.wayfire.overrideAttrs (old: {
-                  mesonFlags = 
-                    (old.mesonFlags or [])
-                    ++ [ 
-                      "-Dtests=disabled"
-                      "-Dwf-touch:tests=disabled"
-                    ];
-                });
-              })
-            ];
+            nixpkgs.config = {
+              allowUnfree = true;
+              permittedInsecurePackages = [
+                "electron-40.10.5"
+              ];
+            };
           }
           lanzaboote.nixosModules.lanzaboote
           nix-flatpak.nixosModules.nix-flatpak

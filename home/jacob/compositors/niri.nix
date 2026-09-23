@@ -40,6 +40,14 @@
       }
     }
 
+    output "DP-2" {
+      mode "2560x1600@120"
+      position x=480 y=1960
+      hot-corners {
+        off
+      }
+    }
+
     layout {
       background-color "transparent"
       focus-ring {

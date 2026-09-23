@@ -188,13 +188,20 @@
         }
 
         local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
-        local servers = { "clangd", "gopls", "rust_analyzer", "expert", "gleam", "tailwindcss" }
+        local servers = { "clangd", "gopls", "rust_analyzer", "gleam", "tailwindcss" }
         for _, server in ipairs(servers) do
           vim.lsp.config(server, {
             capabilities = capabilities
           })
           vim.lsp.enable(server)
         end
+
+        vim.lsp.config("expert", {
+          cmd = { "expert", "--stdio" },
+          root_markers = { "mix.exs", ".git" },
+          filetypes = { "elixir", "eelixir", "heex" },
+          capabilities = capabilities
+        })
     '';
   };
 }

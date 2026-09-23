@@ -50,13 +50,15 @@
       pavucontrol
       vesktop
       protontricks
-      mpvpaper
+      mangohud
+      r2modman
       inputs.hyprland-contrib.packages.${pkgs.stdenv.hostPlatform.system}.grimblast
       inputs.hytale-launcher.packages.${pkgs.stdenv.hostPlatform.system}.default
       inputs.helium.packages.${pkgs.stdenv.hostPlatform.system}.default
       inputs.jellynav.packages.${pkgs.stdenv.hostPlatform.system}.default
     ];
     pointerCursor = {
+      enable = true;
       name = "catppuccin-mocha-light-cursors";
       package = pkgs.catppuccin-cursors.mochaLight;
     };

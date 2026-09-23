@@ -10,7 +10,6 @@
   ];
 
   boot = {
-    bootspec.enable = true;
     loader.systemd-boot = {
       enable = lib.mkForce false;
       configurationLimit = 5;
@@ -62,6 +61,7 @@
   boot.kernelParams = [
     "video=DP-1:2560x1440@170"
     "video=HDMI-A-1:2560x1440@59"
+    "video=DP-2:2560x1600@120"
   ];
 
   zramSwap.enable = true;
@@ -76,7 +76,6 @@
   };
 
   programs.niri.enable = true;
-  programs.wayfire.enable = true;
 
   security.polkit.enable = true;
 
@@ -110,6 +109,8 @@
       };
     };
   };
+
+  services.upower.enable = true;
 
   services.displayManager.ly = {
     enable = true;

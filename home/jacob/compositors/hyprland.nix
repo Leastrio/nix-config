@@ -29,8 +29,16 @@
         bitdepth = 10
       })
 
+      hl.monitor({
+        output = "DP-2",
+        mode = "2560x1600@120",
+        position = "480x1960",
+        scale = 1.6,
+        bitdepth = 10
+      })
+
       hl.bind("SUPER + Return", hl.dsp.exec_cmd("ghostty"))
-      hl.bind("SUPER + d", hl.dsp.exec_cmd("noctalia-shell ipc call launcher toggle"))
+      hl.bind("SUPER + d", hl.dsp.exec_cmd("noctalia msg panel-toggle launcher"))
       hl.bind("SUPER + c", hl.dsp.window.close())
       hl.bind("SUPER + mouse:272", hl.dsp.window.drag())
       hl.bind("SUPER + mouse:273", hl.dsp.window.resize())
@@ -82,6 +90,12 @@
         },
         center = true,
         float = true,
+      })
+
+      hl.window_rule({
+        match = { class = "dev.noctalia.Noctalia" },
+        float = true,
+        size = { 1080, 920 },
       })
 
       hl.env("HYPRCURSOR_THEME", "catppuccin-mocha-light-cursors")
@@ -153,7 +167,7 @@
       })
 
       hl.on("hyprland.start", function()
-        hl.exec_cmd("noctalia-shell")
+        hl.exec_cmd("noctalia")
         hl.exec_cmd("wl-paste --type text --watch cliphist store")
         hl.exec_cmd("wl-paste --type image --watch cliphist store")
         hl.exec_cmd("ghostty", { workspace = "1 silent" })
