@@ -52,6 +52,10 @@
       protontricks
       mangohud
       r2modman
+      (ollama.override {
+        acceleration = "rocm";
+      })
+      opencode
       inputs.hyprland-contrib.packages.${pkgs.stdenv.hostPlatform.system}.grimblast
       inputs.hytale-launcher.packages.${pkgs.stdenv.hostPlatform.system}.default
       inputs.helium.packages.${pkgs.stdenv.hostPlatform.system}.default

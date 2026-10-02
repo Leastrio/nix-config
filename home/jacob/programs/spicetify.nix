@@ -12,7 +12,6 @@
     experimentalFeatures = true;
     alwaysEnableDevTools = true;
     enabledExtensions = with spicePkgs.extensions; [
-      betterGenres
       lastfm
       songStats
       fullAlbumDate
