@@ -10,7 +10,7 @@
   programs.noctalia = {
     enable = true;
     settings = ''
-    [appLauncher]
+[appLauncher]
 enableClipboardHistory = false
 enableSessionSearch = false
 enableSettingsSearch = false
@@ -20,6 +20,7 @@ terminalCommand = "ghostty -e"
 
 [audio]
 enable_overdrive = true
+enable_sounds = false
 preferredPlayer = "spotify"
 
 [bar]
@@ -89,6 +90,8 @@ position = "top"
 [battery.device."/org/freedesktop/UPower/devices/battery_hidpp_battery_0"]
 warning_threshold = 10
 
+[calendar]
+
 [colorSchemes]
 predefinedScheme = "Catppuccin"
 
@@ -135,6 +138,9 @@ id = "media-sysmon-card"
 
 [control_center]
 hidden_tabs = [ "monitor", "bluetooth", "screen-time" ]
+
+    [control_center.calendar]
+    show_events_card = false
 
     [[control_center.shortcuts]]
     type = "caffeine"
@@ -263,8 +269,10 @@ widget_order = [
     box_height = 0.0
     box_width = 0.0
     cx = 189.0
-    cy = 132.0
+    cy = 132.00003051757812
     output = "DP-2"
+    placement_height = 1000.0
+    placement_width = 1600.0
     rotation = 0.0
     type = "media_player"
 
@@ -274,9 +282,11 @@ widget_order = [
     [desktop_widgets.widget.desktop-widget-0000000000000002]
     box_height = 192.0
     box_width = 368.0
-    cx = 200.0
+    cx = 200.00001525878906
     cy = 884.0
     output = "DP-2"
+    placement_height = 1000.0
+    placement_width = 1600.0
     rotation = 0.0
     type = "sysmon"
 
@@ -291,6 +301,8 @@ widget_order = [
     cx = 592.0
     cy = 884.0
     output = "DP-2"
+    placement_height = 1000.0
+    placement_width = 1600.0
     rotation = 0.0
     type = "sysmon"
 
@@ -307,6 +319,8 @@ widget_order = [
     cx = 992.0
     cy = 884.0
     output = "DP-2"
+    placement_height = 1000.0
+    placement_width = 1600.0
     rotation = 0.0
     type = "sysmon"
 
@@ -321,6 +335,8 @@ widget_order = [
     cx = 1392.0
     cy = 884.0
     output = "DP-2"
+    placement_height = 1000.0
+    placement_width = 1600.0
     rotation = 0.0
     type = "sysmon"
 
@@ -333,8 +349,10 @@ widget_order = [
     box_height = 0.0
     box_width = 0.0
     cx = 1484.0
-    cy = 389.0
+    cy = 389.00003051757812
     output = "DP-2"
+    placement_height = 1000.0
+    placement_width = 1600.0
     rotation = 0.0
     type = "weather"
 
@@ -348,6 +366,8 @@ widget_order = [
     cx = 1441.0
     cy = 109.0
     output = "DP-2"
+    placement_height = 1000.0
+    placement_width = 1600.0
     rotation = 0.0
     type = "clock"
 
@@ -377,7 +397,12 @@ enabled = false
 [lockscreen_widgets]
 enabled = false
 schema_version = 2
-widget_order = [ "lockscreen-login-box@HDMI-A-1", "lockscreen-login-box@DP-2", "lockscreen-login-box@DP-1" ]
+widget_order = [
+    "lockscreen-login-box@DP-3",
+    "lockscreen-login-box@HDMI-A-1",
+    "lockscreen-login-box@DP-2",
+    "lockscreen-login-box@DP-1"
+]
 
     [lockscreen_widgets.grid]
     cell_size = 16
@@ -385,11 +410,13 @@ widget_order = [ "lockscreen-login-box@HDMI-A-1", "lockscreen-login-box@DP-2", "
     visible = true
 
     [lockscreen_widgets.widget."lockscreen-login-box@DP-1"]
-    box_height = 70.0
-    box_width = 400.0
+    box_height = 196.0
+    box_width = 720.0
     cx = 1280.0
     cy = 1321.0
     output = "DP-1"
+    placement_height = 1440.0
+    placement_width = 2560.0
     rotation = 0.0
     type = "login_box"
 
@@ -400,17 +427,23 @@ widget_order = [ "lockscreen-login-box@HDMI-A-1", "lockscreen-login-box@DP-2", "
         center_password_text = false
         input_opacity = 1.0
         input_radius = 6.0
+        layout = "regular"
         show_caps_lock = true
         show_keyboard_layout = true
         show_login_button = true
-        show_password_hint = true
+        show_media = true
+        show_session_buttons = true
+        show_unlock_hint = true
+        show_weather = true
 
     [lockscreen_widgets.widget."lockscreen-login-box@DP-2"]
-    box_height = 70.0
-    box_width = 400.0
-    cx = 800.0
+    box_height = 196.0
+    box_width = 720.0
+    cx = 800.00006103515625
     cy = 881.0
     output = "DP-2"
+    placement_height = 1000.0
+    placement_width = 1600.0
     rotation = 0.0
     type = "login_box"
 
@@ -421,17 +454,50 @@ widget_order = [ "lockscreen-login-box@HDMI-A-1", "lockscreen-login-box@DP-2", "
         center_password_text = false
         input_opacity = 1.0
         input_radius = 6.0
+        layout = "regular"
         show_caps_lock = true
         show_keyboard_layout = true
         show_login_button = true
-        show_password_hint = true
+        show_media = true
+        show_session_buttons = true
+        show_unlock_hint = true
+        show_weather = true
+
+    [lockscreen_widgets.widget."lockscreen-login-box@DP-3"]
+    box_height = 196.0
+    box_width = 810.0
+    cx = 640.0
+    cy = 538.0
+    output = "DP-3"
+    placement_height = 720.0
+    placement_width = 1280.0
+    rotation = 0.0
+    type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@DP-3".settings]
+        background_color = "surface_variant"
+        background_opacity = 0.88
+        background_radius = 12.0
+        center_password_text = false
+        input_opacity = 1.0
+        input_radius = 6.0
+        layout = "regular"
+        show_caps_lock = true
+        show_keyboard_layout = true
+        show_login_button = true
+        show_media = true
+        show_session_buttons = true
+        show_unlock_hint = true
+        show_weather = true
 
     [lockscreen_widgets.widget."lockscreen-login-box@HDMI-A-1"]
-    box_height = 70.0
-    box_width = 400.0
+    box_height = 196.0
+    box_width = 720.0
     cx = 720.0
     cy = 2441.0
     output = "HDMI-A-1"
+    placement_height = 2560.0
+    placement_width = 1440.0
     rotation = 0.0
     type = "login_box"
 
@@ -442,10 +508,14 @@ widget_order = [ "lockscreen-login-box@HDMI-A-1", "lockscreen-login-box@DP-2", "
         center_password_text = false
         input_opacity = 1.0
         input_radius = 6.0
+        layout = "regular"
         show_caps_lock = true
         show_keyboard_layout = true
         show_login_button = true
-        show_password_hint = true
+        show_media = true
+        show_session_buttons = true
+        show_unlock_hint = true
+        show_weather = true
 
 [notification]
 layer = "overlay"
@@ -558,6 +628,18 @@ skipStartupTransition = true
     [wallpaper.last]
     path = "/home/jacob/Wallpapers/tropic_island_night.jpg"
 
+    [wallpaper.monitors.DP-1]
+    path = "/home/jacob/Wallpapers/tropic_island_night.jpg"
+
+    [wallpaper.monitors.DP-2]
+    path = "/home/jacob/Wallpapers/tropic_island_night.jpg"
+
+    [wallpaper.monitors.HDMI-A-1]
+    path = "/home/jacob/Wallpapers/tropic_island_night.jpg"
+
+[weather]
+unit = "imperial"
+
 [widget.battery]
 device = "/org/freedesktop/UPower/devices/battery_hidpp_battery_0"
 
@@ -577,14 +659,15 @@ max_length = 345
 display = "text"
 
 [widget.sysmon]
-display = "text"
+show_value = true
 stat = "disk_pct"
+visualization = "none"
 
 [widget.temp]
 display = "text"
 
 [widget.workspaces]
-display = "name"
+label_source = "name"
     '';
   };
 }
