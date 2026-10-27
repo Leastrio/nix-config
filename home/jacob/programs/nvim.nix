@@ -29,6 +29,7 @@
       rainbow-delimiters-nvim
       nvim-web-devicons
       nvim-tree-lua
+      gitsigns-nvim
 
       # Required for telescope
       plenary-nvim
@@ -61,6 +62,7 @@
 
         require("nvim-autopairs").setup {}
         require("nvim-tree").setup()
+        require("gitsigns").setup()
 
         require("lualine").setup {
           options = {
@@ -100,7 +102,8 @@
               enabled = true
             },
             which_key = true,
-            nvimtree = true
+            nvimtree = true,
+            gitsigns = true
           }
         })
         vim.cmd.colorscheme "catppuccin-nvim"
@@ -190,21 +193,14 @@
           },
         }
 
-        local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
-        local servers = { "clangd", "gopls", "rust_analyzer", "gleam", "tailwindcss" }
+        local capabilities = require("cmp_nvim_lsp").default_capabilities()
+        local servers = { "clangd", "gopls", "rust_analyzer", "gleam", "tailwindcss", "expert" }
         for _, server in ipairs(servers) do
           vim.lsp.config(server, {
             capabilities = capabilities
           })
           vim.lsp.enable(server)
         end
-
-        vim.lsp.config("expert", {
-          cmd = { "expert", "--stdio" },
-          root_markers = { "mix.exs", ".git" },
-          filetypes = { "elixir", "eelixir", "heex" },
-          capabilities = capabilities
-        })
     '';
   };
 }
