@@ -91,15 +91,14 @@ in {
               inputs = ["highpass:In"];
               outputs = ["limiter:Output 1"];
             };
-            "capture.props" =
-              {
-                "node.name" = "capture.mic_filter";
-                "node.passive" = true;
-                "audio.rate" = 48000;
-                "audio.channels" = 1;
-                "audio.position" = ["MONO"];
-                "target.object" = "alsa_input.usb-Focusrite_Scarlett_Solo_USB_Y7PM6NJ9B82343-00.HiFi__Mic1__source";
-              };
+            "capture.props" = {
+              "node.name" = "capture.mic_filter";
+              "node.passive" = true;
+              "audio.rate" = 48000;
+              "audio.channels" = 1;
+              "audio.position" = ["MONO"];
+              "target.object" = "alsa_input.usb-Focusrite_Scarlett_Solo_USB_Y7PM6NJ9B82343-00.HiFi__Mic1__source";
+            };
             "playback.props" = {
               "node.name" = "mic_filter_source";
               "media.class" = "Audio/Source";

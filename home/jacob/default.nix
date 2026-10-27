@@ -1,100 +1,33 @@
-{
-  config,
-  pkgs,
-  inputs,
-  ...
-}: {
-  imports = [
-    ./programs
-    ./compositors
-  ];
+{pkgs, ...}: {
+  imports = [./programs];
 
   home = {
     username = "jacob";
-    homeDirectory = "/home/jacob";
+    homeDirectory =
+      if pkgs.stdenv.isDarwin
+      then "/Users/jacob"
+      else "/home/jacob";
     sessionVariables = {
-      HOME_NIX = "$HOME/.config/nixos/home/home.nix";
-      SYS_NIX = "$HOME/.config/nixos/system/configuration.nix";
-      BROWSER = "firefox-devedition";
+      EDITOR = "nvim";
+      VISUAL = "nvim";
     };
+
     packages = with pkgs; [
-      pcmanfm
-      firefox-devedition
-      wineWow64Packages.stable
-      winetricks
-      playerctl
-      cliphist
-      wl-clipboard
-      crosspipe
-      obsidian
-      insomnia
       ripgrep
-      inotify-tools
-      jetbrains.datagrip
-      element-desktop
-      gimp
-      calibre
-      qbittorrent
-      mpv
-      tailwindcss-language-server
-      prismlauncher
-      hyprcursor
-      ffmpeg-full
-      lunar-client
-      vinegar
-      tagger
-      kodi
-      nautilus
-      blender
-      proton-vpn-cli
-      pavucontrol
-      vesktop
-      protontricks
-      mangohud
-      r2modman
-      (ollama.override {
-        acceleration = "rocm";
-      })
-      opencode
-      inputs.hyprland-contrib.packages.${pkgs.stdenv.hostPlatform.system}.grimblast
-      inputs.hytale-launcher.packages.${pkgs.stdenv.hostPlatform.system}.default
-      inputs.helium.packages.${pkgs.stdenv.hostPlatform.system}.default
-      inputs.jellynav.packages.${pkgs.stdenv.hostPlatform.system}.default
+      obsidian
     ];
-    pointerCursor = {
-      enable = true;
-      name = "catppuccin-mocha-light-cursors";
-      package = pkgs.catppuccin-cursors.mochaLight;
-    };
+
+    stateVersion = "23.05";
   };
-  gtk = {
-    enable = true;
-    iconTheme = {
-      name = "Adwaita";
-      package = pkgs.adwaita-icon-theme;
-    };
-    gtk4 = {
-      extraCss = ''
-        tabbar {
-          background-color: #1e1e2ed9;
-        }
-      '';
-      theme = null;
-    };
-  };
+
   programs.home-manager.enable = true;
+
   programs.direnv = {
     enable = true;
-    config = {
-      global = {
-        load_dotenv = true;
-      };
-    };
-    nix-direnv = {
-      enable = true;
-    };
+    config.global.load_dotenv = true;
+    nix-direnv.enable = true;
   };
-  systemd.user.startServices = "sd-switch";
+
   programs.git = {
     enable = true;
     settings = {
@@ -108,5 +41,4 @@
     };
     signing.format = null;
   };
-  home.stateVersion = "23.05";
 }

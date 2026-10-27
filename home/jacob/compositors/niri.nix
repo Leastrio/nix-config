@@ -10,7 +10,7 @@
     hotkey-overlay {
       skip-at-startup
     }
-    
+      
     input {
       focus-follows-mouse max-scroll-amount="10%"
       disable-power-key-handling

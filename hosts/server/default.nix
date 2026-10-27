@@ -49,7 +49,7 @@
   fileSystems."/mnt/nas" = {
     device = "192.168.5.162:/volume1/Jacob/AGP-BACKUP";
     fsType = "nfs";
-    options = [ "x-systemd.automount" "noatime" ];
+    options = ["x-systemd.automount" "noatime"];
   };
 
   systemd.timers."agp-backup" = {

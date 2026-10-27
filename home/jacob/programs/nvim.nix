@@ -1,8 +1,4 @@
-{
-  pkgs,
-  inputs,
-  ...
-}: {
+{pkgs, ...}: {
   programs.neovim = {
     enable = true;
 
@@ -30,12 +26,12 @@
       nvim-web-devicons
       nvim-tree-lua
       gitsigns-nvim
+      transparent-nvim
 
       # Required for telescope
       plenary-nvim
 
-      inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.nest-nvim
-      inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.transparent-nvim
+      (pkgs.callPackage ../../../packages/nest-nvim.nix {})
     ];
     extraConfig = ''
       lua <<
@@ -192,6 +188,24 @@
             },
           },
         }
+
+        -- for some reason tailwind lsp runs on any folder with a .git repo
+        vim.lsp.config("tailwindcss", {
+          root_dir = function(bufnr, on_dir)
+            local util = require("lspconfig.util")
+            local fname = vim.api.nvim_buf_get_name(bufnr)
+            local markers = {
+              "tailwind.config.js", "tailwind.config.cjs", "tailwind.config.mjs", "tailwind.config.ts",
+              "postcss.config.js", "postcss.config.cjs", "postcss.config.mjs", "postcss.config.ts",
+            }
+            markers = util.insert_package_json(markers, "tailwindcss", fname)
+            markers = util.root_markers_with_field(markers, { "mix.lock", "Gemfile.lock" }, "tailwind", fname)
+            local found = vim.fs.find(markers, { path = fname, upward = true })[1]
+            if found then
+              on_dir(vim.fs.dirname(found))
+            end
+          end,
+        })
 
         local capabilities = require("cmp_nvim_lsp").default_capabilities()
         local servers = { "clangd", "gopls", "rust_analyzer", "gleam", "tailwindcss", "expert" }

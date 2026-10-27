@@ -109,8 +109,8 @@
       waylandsessions = "${config.services.displayManager.sessionData.desktops}/share/wayland-sessions";
       xsessions = "${config.services.displayManager.sessionData.desktops}/share/xsessions";
       xinitrc = "null";
-      restart_cmd = "/run/current-system/sw/bin/systemctl poweroff";
-      shutdown_cmd = "/run/current-system/sw/bin/systemctl reboot";
+      restart_cmd = "/run/current-system/sw/bin/systemctl reboot";
+      shutdown_cmd = "/run/current-system/sw/bin/systemctl poweroff";
     };
   };
 

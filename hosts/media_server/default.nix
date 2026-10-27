@@ -9,7 +9,7 @@
 
   users.users.jacob = {
     isNormalUser = true;
-    extraGroups = [ "wheel" ];
+    extraGroups = ["wheel"];
   };
 
   services.jellyfin = {

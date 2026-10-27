@@ -49,14 +49,18 @@
     lanzaboote,
     nix-flatpak,
     ...
-  } @ inputs: {
-    formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.alejandra;
-    packages.x86_64-linux = let
-      pkgs = nixpkgs.legacyPackages.x86_64-linux;
-    in {
-      nest-nvim = pkgs.callPackage ./packages/nest-nvim.nix {};
-      transparent-nvim = pkgs.callPackage ./packages/transparent-nvim.nix {};
+  } @ inputs: let
+    forAllSystems = nixpkgs.lib.genAttrs ["x86_64-linux" "aarch64-darwin"];
+
+    hmCommon = {
+      home-manager = {
+        useGlobalPkgs = true;
+        useUserPackages = true;
+        extraSpecialArgs = {inherit inputs;};
+      };
     };
+  in {
+    formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
 
     nixosConfigurations = {
       desktop = nixpkgs.lib.nixosSystem {
@@ -67,16 +71,8 @@
         modules = [
           ./hosts/desktop
           home-manager.nixosModules.home-manager
-          {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              users.jacob = import ./home/jacob;
-              extraSpecialArgs = {
-                inherit inputs;
-              };
-            };
-          }
+          hmCommon
+          {home-manager.users.jacob.imports = [./home/jacob ./home/jacob/linux.nix];}
           {
             nixpkgs.config = {
               allowUnfree = true;
@@ -97,18 +93,21 @@
         ];
       };
 
-      mediaServer = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          ./hosts/media_server
-        ];
-      };
+      #mediaServer = nixpkgs.lib.nixosSystem {
+      #  system = "x86_64-linux";
+      #  modules = [
+      #    ./hosts/media_server
+      #  ];
+      #};
     };
 
     darwinConfigurations."Jacobs-MacBook-Air" = nix-darwin.lib.darwinSystem {
-      specialArgs = { inherit self; };
+      specialArgs = {inherit self inputs;};
       modules = [
         ./hosts/laptop
+        home-manager.darwinModules.home-manager
+        hmCommon
+        {home-manager.users.jacob = import ./home/jacob;}
       ];
     };
   };
