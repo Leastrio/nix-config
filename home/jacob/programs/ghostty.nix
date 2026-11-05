@@ -6,7 +6,7 @@
   programs.ghostty = {
     enable = true;
     package =
-      if pkgs.stdenv.isDarwin
+      if pkgs.stdenv.hostPlatform.isDarwin
       then pkgs.ghostty-bin
       else pkgs.ghostty;
     settings =
@@ -20,12 +20,11 @@
         window-padding-balance = "true";
         window-theme = "ghostty";
       }
-      // lib.optionalAttrs pkgs.stdenv.isLinux {
+      // lib.optionalAttrs pkgs.stdenv.hostPlatform.isLinux {
         window-decoration = "false";
       }
-      // lib.optionalAttrs pkgs.stdenv.isDarwin {
-        font-size = "14";
-        macos-titlebar-style = "hidden";
+      // lib.optionalAttrs pkgs.stdenv.hostPlatform.isDarwin {
+        font-size = "13";
         background-blur = "true";
       };
   };

@@ -2,7 +2,6 @@
   programs.fish = {
     enable = true;
     shellAliases = {
-      ls = "${pkgs.eza}/bin/eza";
       grep = "${pkgs.ripgrep}/bin/rg";
     };
     functions = {

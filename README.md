@@ -13,3 +13,8 @@ sudo nixos-rebuild switch --flake .#system
 To build for macbook:
 
 sudo darwin-rebuild switch --flake .
+
+
+To build and deploy to a server:
+
+sudo nixos-rebuild switch --flake .#server --target-host jacob@server

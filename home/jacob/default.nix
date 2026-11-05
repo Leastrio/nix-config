@@ -1,10 +1,13 @@
-{pkgs, ...}: {
-  imports = [./programs];
+{inputs, pkgs, ...}: {
+  imports = [
+    ./programs
+    inputs.nix-index-database.homeModules.nix-index
+  ];
 
   home = {
     username = "jacob";
     homeDirectory =
-      if pkgs.stdenv.isDarwin
+      if pkgs.stdenv.hostPlatform.isDarwin
       then "/Users/jacob"
       else "/home/jacob";
     sessionVariables = {
@@ -40,5 +43,29 @@
       push.autoSetupRemote = true;
     };
     signing.format = null;
+  };
+
+  programs.ssh = {
+    enable = true;
+    enableDefaultConfig = false;
+    settings = {
+      server = {
+        HostName = "192.168.5.195";
+        User = "jacob";
+      };
+      media = {
+        HostName = "192.168.5.239";
+        User = "jacob";
+      };
+    };
+  };
+
+  programs.nix-index.enable = true;
+  programs.nix-index-database.comma.enable = true;
+
+  programs.eza = {
+    enable = true;
+    icons = "auto";
+    git = true;
   };
 }

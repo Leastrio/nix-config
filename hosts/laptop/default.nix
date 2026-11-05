@@ -7,10 +7,14 @@
   nixpkgs.config.allowUnfree = true;
 
   system.primaryUser = "jacob";
-  user.users.jacob = {
+  users.users.jacob = {
     name = "jacob";
     home = "/Users/jacob";
+    shell = pkgs.fish;
   };
+
+  environment.shells = [ pkgs.fish ];
+  programs.fish.enable = true;
 
   environment.systemPackages = with pkgs; [
     nixd
@@ -20,7 +24,18 @@
     nerd-fonts.jetbrains-mono
   ];
 
-  programs.fish.enable = true;
+  homebrew = {
+    enable = true;
+    enableFishIntegration = true;
+  };
+
+  services.jankyborders = {
+    enable = true;
+    width = 4.0;
+    hidpi = true;
+    active_color = "0xffcba6f7"; # Catppuccin Mocha blue
+    inactive_color = "0xff45475a"; # no border on unfocused windows
+  };
 
   nix = {
     settings.experimental-features = ["nix-command" "flakes"];
