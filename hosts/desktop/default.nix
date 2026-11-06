@@ -77,6 +77,11 @@
   };
 
   programs.niri.enable = true;
+  programs.umbriel.enable = true;
+  programs.mango.enable = true;
+
+  # River 0.5 has no NixOS module yet, so add its login session by hand
+  services.displayManager.sessionPackages = [pkgs.river];
 
   security.polkit.enable = true;
 
@@ -165,6 +170,7 @@
 
   environment = {
     systemPackages = with pkgs; [
+      river
       git
       kdePackages.polkit-kde-agent-1
       man-pages
