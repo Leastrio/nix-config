@@ -45,6 +45,8 @@ in {
       protontricks
       mangohud
       r2modman
+      grim
+      slurp
       inputs.hyprland-contrib.packages.${system}.grimblast
       inputs.hytale-launcher.packages.${system}.default
       inputs.helium.packages.${system}.default

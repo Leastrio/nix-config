@@ -99,7 +99,7 @@
           action = "window-toggle-floating";
           repeat = false;
         };
-        "Print" = "spawn grimblast --notify copy area";
+        "Print" = ''spawn grim -g "$(slurp)" - | wl-copy'';
         "Mod+Escape" = "session-quit";
 
         "XF86AudioPlay" = {

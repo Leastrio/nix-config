@@ -67,7 +67,7 @@ in {
     bind=SUPER,c,killclient,
     bind=SUPER,f,togglefullscreen,
     bind=SUPER,v,togglefloating,
-    bind=NONE,Print,spawn,grimblast --notify copy area
+    bind=NONE,Print,spawn,grim -g "$(slurp)" - | wl-copy && notify-send "Screenshot copied"
     bindl=NONE,XF86AudioPlay,spawn,playerctl play-pause
     bindl=NONE,XF86AudioPrev,spawn,playerctl previous
     bindl=NONE,XF86AudioNext,spawn,playerctl next
