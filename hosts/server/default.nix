@@ -17,7 +17,7 @@
   time.timeZone = "America/Denver";
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
-  nix.settings.trusted-users = [ "jacob" ]; 
+  nix.settings.trusted-users = ["jacob"];
 
   virtualisation.docker = {
     enable = true;

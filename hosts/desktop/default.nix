@@ -77,7 +77,6 @@
   };
 
   programs.niri.enable = true;
-  programs.umbriel.enable = true;
   programs.mango.enable = true;
 
   # River 0.5 has no NixOS module yet, so add its login session by hand

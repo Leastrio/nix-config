@@ -13,7 +13,7 @@
     shell = pkgs.fish;
   };
 
-  environment.shells = [ pkgs.fish ];
+  environment.shells = [pkgs.fish];
   programs.fish.enable = true;
 
   environment.systemPackages = with pkgs; [
