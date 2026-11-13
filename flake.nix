@@ -12,8 +12,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    lanzaboote.url = "github:nix-community/lanzaboote";
-
     # Programs
     hyprland.url = "github:hyprwm/Hyprland";
     hyprland-contrib = {
@@ -37,14 +35,26 @@
     };
 
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=v0.7.0";
-    hytale-launcher.url = "github:TNAZEP/HytaleLauncherFlake";
+
+    lanzaboote = {
+      url = "github:nix-community/lanzaboote";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    hytale-launcher = {
+      url = "github:TNAZEP/HytaleLauncherFlake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    jellynav = {
+      url = "github:Leastrio/jellynav";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     helium = {
       url = "github:AlvaroParker/helium-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    jellynav.url = "github:Leastrio/jellynav";
 
     nix-index-database = {
       url = "github:nix-community/nix-index-database";

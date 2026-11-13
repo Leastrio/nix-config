@@ -43,7 +43,10 @@
         name = "Leastrio";
       };
       init.defaultBranch = "main";
-      credential.helper = "store";
+      credential.helper =
+        if pkgs.stdenv.hostPlatform.isDarwin
+        then "osxkeychain"
+        else "${pkgs.gitFull}/bin/git-credential-libsecret";
       push.autoSetupRemote = true;
     };
     signing.format = null;

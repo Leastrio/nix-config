@@ -27,7 +27,7 @@
         "spotify"
         "vesktop"
       ];
-      
+
       window_rule_once = [
         "tags:1,monitor:DP-1,app_id:^firefox"
         "tags:1,monitor:DP-2,app_id:^[Ss]potify$"
@@ -39,9 +39,9 @@
         "is_floating:1,app_id:^Erlang$"
       ];
 
-      tag_rule = 
-        (map (tag: 
-          "id:${tag},monitor_name:DP-1,layout_name:dwindle"
+      tag_rule =
+        (map (
+          tag: "id:${tag},monitor_name:DP-1,layout_name:dwindle"
         ) ["1" "2" "3"])
         ++ [
           "id:1,monitor_name:HDMI-A-1,layout_name:vertical_scroller"

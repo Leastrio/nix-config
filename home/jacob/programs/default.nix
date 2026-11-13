@@ -3,7 +3,7 @@
     ./btop.nix
     ./fish.nix
     ./ghostty.nix
-    ./nvim.nix
+    ./nvim
     ./starship.nix
   ];
 }

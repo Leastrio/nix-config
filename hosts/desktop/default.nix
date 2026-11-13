@@ -142,6 +142,7 @@
     };
   };
   systemd.services."backup-drive" = {
+    unitConfig.RequiresMountsFor = "/data";
     path = [pkgs.rsync];
     script = ''
       nice -n 19 rsync \

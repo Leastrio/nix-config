@@ -69,7 +69,7 @@
       TIMESTAMP=$(date +"%F_%T")
       BACKUP_FILE=$BACKUP_DIR/backup_$TIMESTAMP.sql
 
-      docker compose -p anti-ghost-ping exec -t database pg_dump -U agp agp > $BACKUP_FILE
+      docker compose -p anti-ghost-ping exec -T database pg_dump -U agp agp > $BACKUP_FILE
       find $BACKUP_DIR -type f -name "backup_*.sql" -mtime +7 -exec rm {} \;
     '';
     serviceConfig = {
